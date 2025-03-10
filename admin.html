@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Job Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+        .sidebar {
+            width: 20%;
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+        .sidebar h3 {
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .job-list {
+            margin-top: 20px;
+        }
+        .job-item {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .job-item button {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Menu Admin</h3>
+        <ul>
+            <li>Dashboard</li>
+            <li>Tambah Lowongan</li>
+            <li>Kelola Lowongan</li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Admin - Tambah Lowongan</h2>
+        <form id="jobForm">
+            <input type="text" id="title" placeholder="Judul Pekerjaan" required>
+            <input type="text" id="company" placeholder="Nama Perusahaan" required>
+            <select id="type">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote">Remote</option>
+            </select>
+            <input type="number" id="salary" placeholder="Gaji (Rp)" required>
+            <textarea id="description" placeholder="Deskripsi Pekerjaan" required></textarea>
+            <button type="submit">Tambah Loker</button>
+        </form>
+        
+        <h2>Daftar Lowongan</h2>
+        <div class="job-list" id="jobList"></div>
+    </div>
+    
+    <script>
+        document.getElementById('jobForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let title = document.getElementById('title').value;
+            let company = document.getElementById('company').value;
+            let type = document.getElementById('type').value;
+            let salary = document.getElementById('salary').value;
+            let description = document.getElementById('description').value;
+            
+            let jobList = document.getElementById('jobList');
+            let jobItem = document.createElement('div');
+            jobItem.classList.add('job-item');
+            jobItem.innerHTML = `<strong>${title}</strong> - ${company} (${type}) | Rp ${salary} 
+                <button onclick="this.parentElement.remove()">Hapus</button>`;
+            
+            jobList.appendChild(jobItem);
+            
+            document.getElementById('jobForm').reset();
+        });
+    </script>
+</body>
+</html>
